@@ -195,11 +195,30 @@
     /* --- 导语区视频：由用户通过原生控件播放，离屏或切后台自动暂停 --- */
     var introVid = document.querySelector('.intro-video video');
     if (introVid) {
+      var introBox = introVid.closest('.intro-video');
+      var introPlay = introBox && introBox.querySelector('.intro-play');
       function stopIntro(reset) {
         introVid.pause();
         if (reset) {
           try { introVid.currentTime = 0; } catch (e) {}
         }
+      }
+      if (introPlay) {
+        introPlay.addEventListener('click', function () {
+          introVid.controls = true;
+          var p = introVid.play();
+          if (p && p.catch) p.catch(function () {
+            introVid.controls = false;
+            if (introBox) introBox.classList.remove('is-playing');
+          });
+        });
+        introVid.addEventListener('playing', function () {
+          if (introBox) introBox.classList.add('is-playing');
+        });
+        introVid.addEventListener('ended', function () {
+          introVid.controls = false;
+          if (introBox) introBox.classList.remove('is-playing');
+        });
       }
       if ('IntersectionObserver' in window) {
         new IntersectionObserver(function (es) {
@@ -209,6 +228,7 @@
       /* 视频缺失时隐藏元素，露出占位底纹与文件名提示 */
       introVid.addEventListener('error', function () {
         introVid.style.display = 'none';
+        if (introPlay) introPlay.style.display = 'none';
       });
       document.addEventListener('visibilitychange', function () {
         if (document.hidden) stopIntro(false);

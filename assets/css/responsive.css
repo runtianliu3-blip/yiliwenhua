@@ -44,8 +44,8 @@
 }
 
 @media (max-width:768px){
-  body{font-size:14px;line-height:1.7;overflow-x:hidden}
-  .wrap{--pad:18px}
+  body{font-size:15px;line-height:1.75;overflow-x:hidden}
+  .wrap{--pad:20px}
   .sec{padding:50px 0}
   .sec-sm{padding:38px 0}
   .sec.first{padding-top:calc(92px + env(safe-area-inset-top,0px))}
@@ -57,12 +57,12 @@
   .mt-xl{margin-top:38px}
 
   /* 手机页头：缩短黑色占高，但保留 44px 触控区域。 */
-  .hdr{padding:calc(9px + env(safe-area-inset-top,0px)) 0 9px}
+  .hdr{padding:calc(6px + env(safe-area-inset-top,0px)) 0 6px}
   .hdr-in{gap:12px;min-height:44px}
-  .logo-mk{height:29px}
+  .logo-mk{height:27px}
   .burger{width:44px;height:44px;margin-right:-7px}
   .drawer{
-    padding:calc(76px + env(safe-area-inset-top,0px))
+    padding:calc(68px + env(safe-area-inset-top,0px))
             max(20px,env(safe-area-inset-right,0px))
             calc(26px + env(safe-area-inset-bottom,0px))
             max(20px,env(safe-area-inset-left,0px));
@@ -77,8 +77,8 @@
   .hero h1{font-size:clamp(30px,9.4vw,40px);line-height:1.2}
   .hero-sub{margin-top:16px;max-width:26em;font-size:13.5px;line-height:1.75}
   .hero-sub br{display:none}
-  .hero-btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:25px;max-width:360px}
-  .hero-btns .btn{width:100%;min-width:0}
+  .hero-btns{display:flex;flex-wrap:wrap;gap:9px;margin-top:25px;max-width:360px}
+  .hero-btns .btn{width:auto;min-width:0}
   .hero-in .wrap{
     padding-left:max(18px,env(safe-area-inset-left,0px));
     padding-right:max(18px,env(safe-area-inset-right,0px));
@@ -88,36 +88,36 @@
   .hero-prev{left:max(18px,env(safe-area-inset-left,0px))}
   .hero-next{right:max(18px,env(safe-area-inset-right,0px))}
 
-  /* 首页导语：2×2 数据卡 + 较窄竖版视频，解决视频占满一屏的问题。 */
+  /* 首页导语沿用桌面官网的开放式数据横排，避免移动端出现厚重 App 卡片感。 */
   .hero + .sec{padding-top:46px}
   .intro-split{gap:34px}
   .intro-tx h2{font-size:25px}
   .intro-sub{margin-top:13px;max-width:none;font-size:13.5px;line-height:1.85}
   .intro-stats{
-    grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:22px 0;
-    max-width:none;overflow:hidden;background:rgba(255,255,255,.66);
-    border:1px solid var(--line-l);border-radius:12px;
+    grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:22px 0 24px;
+    max-width:none;overflow:visible;background:transparent;
+    border-top:1px solid var(--line-l);border-bottom:1px solid var(--line-l);border-radius:0;
   }
-  .intro-stats>div{min-width:0;padding:16px 14px}
-  .intro-stats>div:nth-child(even){border-left:1px solid var(--line-l)}
-  .intro-stats>div:nth-child(n+3){border-top:1px solid var(--line-l)}
-  .intro-stats>div>b{font-size:25px}
-  .intro-stats>div>span{margin-top:6px;font-size:11.5px;letter-spacing:.06em}
-  .intro-btns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
-  .intro-btns .btn{width:100%;min-width:0}
-  .intro-video{width:clamp(224px,68vw,260px);max-width:none}
-  .intro-video .media{border-radius:13px;box-shadow:0 16px 40px rgba(25,22,19,.14)}
+  .intro-stats>div{min-width:0;padding:14px 6px 13px;text-align:center}
+  .intro-stats>div:nth-child(n+2){border-left:1px solid var(--line-l)}
+  .intro-stats>div:nth-child(n+3){border-top:0}
+  .intro-stats>div>b{font-size:clamp(17px,4.8vw,20px);letter-spacing:-.025em}
+  .intro-stats>div>span{margin-top:5px;font-size:11px;line-height:1.35;letter-spacing:0}
+  .intro-btns{display:flex;flex-wrap:wrap;gap:9px}
+  .intro-btns .btn{width:auto;min-width:0}
+  .intro-video{width:min(50vw,190px);max-width:none}
+  .intro-video .media{border-radius:9px;box-shadow:0 14px 34px rgba(25,22,19,.12)}
   .vid-sound{right:12px;bottom:12px;width:44px;height:44px}
   .btn{min-height:44px;padding:11px 16px;font-size:12px;letter-spacing:.07em}
 
-  /* 所有数据横带保持 2×2，避免手机端变成四个超高大块。 */
-  .stats-in,.about-stats,.cd-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .stat{padding:20px 6px 22px}
-  .stat>b{font-size:24px}
-  .stat>span{font-size:11px;margin-top:7px;letter-spacing:.06em}
-  .stat:nth-child(2n+1)::before{display:none}
-  .stat:nth-child(n+3){border-top:1px solid var(--line-d)}
-  .light .stat:nth-child(n+3){border-top-color:var(--line-l)}
+  /* 数据横带和桌面端一样保持单排四列。 */
+  .stats-in,.about-stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .cd-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat{padding:20px 4px 21px}
+  .stat>b{font-size:clamp(18px,5vw,21px)}
+  .stat>span{font-size:10.5px;line-height:1.4;margin-top:7px;letter-spacing:0}
+  .stat:nth-child(n+2)::before{display:block;top:14px;bottom:14px}
+  .stat:nth-child(n+3){border-top:0}
 
   /* 内页首屏与内容栅格。 */
   .phero{padding:calc(101px + env(safe-area-inset-top,0px)) 0 40px}
@@ -126,8 +126,24 @@
   .crumb{margin-bottom:12px;font-size:10px!important;letter-spacing:.16em!important}
   .about-stats{gap:20px 14px}
   .cd-stats{gap:18px 12px}
-  .g2,.g3,.g4,.svc-grid,.team-grid,.values{grid-template-columns:1fr}
-  body[data-page="home"] .grid.g4{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .g2,.g3,.g4,.team-grid{grid-template-columns:1fr}
+  .values{grid-template-columns:repeat(2,minmax(0,1fr));gap:25px 18px}
+  .svc-grid{
+    display:grid;grid-template-columns:none;grid-auto-flow:column;
+    grid-auto-columns:min(76vw,274px);gap:12px;overflow-x:auto;
+    padding-bottom:4px;scroll-snap-type:x mandatory;overscroll-behavior-inline:contain;
+    scrollbar-width:none;
+  }
+  .svc-grid::-webkit-scrollbar{display:none}
+  .svc-grid .svc{scroll-snap-align:start}
+  body[data-page="home"] .grid.g4{
+    display:grid;grid-template-columns:none;grid-auto-flow:column;
+    grid-auto-columns:clamp(142px,42vw,176px);gap:12px;overflow-x:auto;
+    padding-bottom:5px;scroll-snap-type:x mandatory;overscroll-behavior-inline:contain;
+    scrollbar-width:none;
+  }
+  body[data-page="home"] .grid.g4::-webkit-scrollbar{display:none}
+  body[data-page="home"] .grid.g4 .case{scroll-snap-align:start}
   body[data-page="cases"] .grid.g3{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:none}
   body[data-page="cases"] .case-info{padding:12px 11px 14px}
   body[data-page="cases"] .case-info h3{font-size:13.5px;line-height:1.45}
@@ -153,22 +169,25 @@
   .about-tx .lead{font-size:14px;line-height:1.85}
   .about-feat{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 6px;margin-top:26px}
   .about-feat>div{padding:0 8px}
-  .about-stats-card{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 0;padding:22px 6px;margin-top:30px;border-radius:12px}
-  .asc-item:nth-child(odd)::before{display:none}
-  .asc-item>svg{width:12px;height:34px}
-  .asc-tx b{font-size:23px}
-  .asc-tx>span{margin-top:7px;font-size:10.5px}
+  .about-stats-card{grid-template-columns:repeat(4,minmax(0,1fr));gap:0;padding:19px 4px;margin-top:30px;border-radius:10px}
+  .asc-item:nth-child(n+2)::before{display:block}
+  .asc-item>svg{display:none}
+  .asc-tx b{font-size:clamp(17px,4.8vw,20px)}
+  .asc-tx>b em{font-size:11px}
+  .asc-tx>span{margin-top:6px;font-size:10px;letter-spacing:0}
   .av-cap{padding:24px 17px 14px}
   .av-cap h4{font-size:15px}
   .av-play{width:54px;height:54px}
-  .values{gap:24px}
   .svc{padding:25px 20px 22px}
   .svc-ic{margin-bottom:15px}
   .svc p{margin-top:10px;line-height:1.8}
   .case .media{aspect-ratio:16/10}
   .filters{gap:8px;margin-bottom:32px}
   .filter{min-height:44px;padding:9px 16px;font-size:12px}
-  .srow+.srow{margin-top:42px;padding-top:42px}
+  .srow{gap:0;background:#fff;border:1px solid var(--line-l);border-radius:12px;overflow:hidden}
+  .srow>.srow-media{aspect-ratio:16/10;border-radius:0}
+  .srow>div:not(.srow-media){padding:23px 19px 25px}
+  .srow+.srow{margin-top:18px;padding-top:0;border-top:1px solid var(--line-l)}
   .srow h3{font-size:20px}
   .srow>div>p{margin-top:13px;line-height:1.85}
   .slist{margin-top:18px;gap:9px}
@@ -204,18 +223,12 @@
 }
 
 @media (max-width:420px){
-  .stats-in{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .stat:nth-child(2n)::before{display:block}
-  .stat:nth-child(2)::before{top:14px;bottom:14px}
-  .stat:nth-child(4)::before{top:14px;bottom:14px}
   .tm-who{flex-wrap:wrap}
   .stars{width:100%;margin-left:57px;margin-top:2px}
 }
 
 @media (max-width:350px){
   .wrap{--pad:16px}
-  .hero-btns,.intro-btns{grid-template-columns:1fr}
-  .hero-btns{max-width:220px}
   .about-feat{grid-template-columns:1fr;gap:14px}
   .about-feat>div{padding:0;min-height:44px}
   .about-feat>div+div{border-left:0}

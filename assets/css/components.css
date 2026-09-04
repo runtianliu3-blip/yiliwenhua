@@ -13,6 +13,16 @@
 /* 右侧视频：竖版短视频，限宽居中 */
 .intro-video{position:relative;width:100%;max-width:342px;margin:0 auto}
 .intro-video .media{aspect-ratio:9/16;border-radius:18px}
+.intro-play{
+  position:absolute;left:50%;top:50%;z-index:4;transform:translate(-50%,-50%);
+  width:58px;height:58px;padding:0;border-radius:50%;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;color:#fff;
+  border:1px solid rgba(255,255,255,.68);background:rgba(14,14,15,.48);
+  backdrop-filter:blur(6px);transition:opacity .3s var(--ease),transform .3s var(--ease),background .3s var(--ease);
+}
+.intro-play svg{width:22px;height:22px;margin-left:3px;fill:currentColor;stroke:none}
+.intro-play:hover{background:var(--gold);color:#1A1512;transform:translate(-50%,-50%) scale(1.05)}
+.intro-video.is-playing .intro-play{opacity:0;visibility:hidden;pointer-events:none}
 .vid-sound{
   position:absolute;right:14px;bottom:14px;z-index:3;
   width:40px;height:40px;padding:0;cursor:pointer;color:#fff;

@@ -8,9 +8,9 @@
 <link rel="icon" href="assets/images/favicon.png" type="image/png">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/layout.css">
-<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/components.css?v=20260905b">
 <link rel="stylesheet" href="assets/css/pages.css">
-<link rel="stylesheet" href="assets/css/responsive.css">
+<link rel="stylesheet" href="assets/css/responsive.css?v=20260905b">
 <link rel="stylesheet" href="assets/css/motion.css">
 <script>
 /* 首页始终从首屏开始；保留带锚点链接的正常定位。 */
@@ -83,9 +83,12 @@ if (!location.hash) {
 
       <div class="intro-video rv" data-d="140">
         <div class="media" data-ph="intro.mp4">
-          <video src="assets/videos/intro.mp4" poster="assets/images/intro-poster.jpg"
-                 controls playsinline preload="metadata"
+          <video src="assets/videos/intro.mp4?v=20260905-hd" poster="assets/images/intro-poster.jpg?v=20260905-hd"
+                 playsinline preload="metadata"
                  aria-label="老板解说短片"></video>
+          <button class="intro-play" type="button" aria-label="播放老板解说短片">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6.5l9 5.5-9 5.5z"/></svg>
+          </button>
         </div>
       </div>
     </div>
@@ -133,8 +136,8 @@ if (!location.hash) {
       <div class="case case-v zoom rv">
         <a class="case-a" href="contact.html">
           <div class="media vert" data-ph="case-1.mp4">
-            <img src="assets/images/case-1-poster.jpg" alt="汽车维修IP打造案例">
-            <video src="assets/videos/case-1.mp4" muted loop playsinline preload="none" aria-label="汽车维修IP打造案例视频"></video>
+            <img src="assets/images/case-1-poster.jpg?v=20260905-hd" alt="汽车维修IP打造案例">
+            <video src="assets/videos/case-1.mp4?v=20260905-hd" muted loop playsinline preload="none" aria-label="汽车维修IP打造案例视频"></video>
             <span class="case-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6.5l9 5.5-9 5.5z"/></svg></span>
           </div>
           <div class="case-info"><h3>汽车维修IP打造</h3><p>车来顺 · 老吴</p></div>
@@ -161,8 +164,8 @@ if (!location.hash) {
       <div class="case case-v zoom rv" data-d="200">
         <a class="case-a" href="contact.html">
           <div class="media vert" data-ph="case-3.mp4">
-            <img src="assets/images/case-3-poster.jpg" alt="二手货车IP打造案例">
-            <video src="assets/videos/case-3.mp4" muted loop playsinline preload="none" aria-label="二手货车IP打造案例视频"></video>
+            <img src="assets/images/case-3-poster.jpg?v=20260905-hd" alt="二手货车IP打造案例">
+            <video src="assets/videos/case-3.mp4?v=20260905-hd" muted loop playsinline preload="none" aria-label="二手货车IP打造案例视频"></video>
             <span class="case-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6.5l9 5.5-9 5.5z"/></svg></span>
           </div>
           <div class="case-info"><h3>二手货车IP打造</h3><p>小虎淘货车</p></div>
@@ -175,8 +178,8 @@ if (!location.hash) {
       <div class="case case-v zoom rv" data-d="300">
         <a class="case-a" href="contact.html">
           <div class="media vert" data-ph="case-4.mp4">
-            <img src="assets/images/case-4-poster.jpg" alt="建材行业IP打造案例">
-            <video src="assets/videos/case-4.mp4" muted loop playsinline preload="none" aria-label="建材行业IP打造案例视频"></video>
+            <img src="assets/images/case-4-poster.jpg?v=20260905-hd" alt="建材行业IP打造案例">
+            <video src="assets/videos/case-4.mp4?v=20260905-hd" muted loop playsinline preload="none" aria-label="建材行业IP打造案例视频"></video>
             <span class="case-play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6.5l9 5.5-9 5.5z"/></svg></span>
           </div>
           <div class="case-info"><h3>建材行业IP打造</h3><p>水泥制品 · 华姐</p></div>
@@ -208,6 +211,6 @@ if (!location.hash) {
 </section>
 
 <div id="site-footer"></div>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=20260905b"></script>
 </body>
 </html>
