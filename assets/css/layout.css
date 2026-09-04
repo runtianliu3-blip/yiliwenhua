@@ -1,0 +1,165 @@
+/* ============ 页头 / 导航 ============ */
+.hdr{
+  position:fixed;top:0;left:0;right:0;z-index:120;
+  transition:background .4s var(--ease),border-color .4s var(--ease);
+  border-bottom:1px solid transparent;
+  padding:calc(16px + env(safe-area-inset-top,0px)) 0 16px;
+}
+.hdr-in{display:flex;align-items:center;gap:28px}
+.hdr.solid{background:rgba(14,14,15,.93);backdrop-filter:saturate(160%) blur(14px);border-bottom-color:var(--line-d)}
+.hdr.on-light{background:rgba(255,255,255,.95);backdrop-filter:saturate(160%) blur(14px);border-bottom-color:var(--line-l)}
+
+.logo{display:flex;align-items:center;color:var(--tx-light);margin-right:auto}
+.on-light .logo{color:var(--tx-dark)}
+.logo-mk{
+  display:block;height:38px;flex:none;
+}
+.logo-mk img{display:block;height:100%;width:auto}
+.logo-mk .lg-d{display:none}
+.on-light .logo-mk .lg-l{display:none}
+.on-light .logo-mk .lg-d{display:block}
+
+.nav{display:flex;align-items:center;gap:26px;margin-right:32px}
+.nav a{font-size:13px;letter-spacing:.06em;color:var(--tx-dim);position:relative;padding:5px 0}
+.on-light .nav a{color:var(--tx-mid)}
+.nav a::after{
+  content:"";position:absolute;left:0;right:100%;bottom:0;height:1px;background:var(--gold);
+  transition:right .35s var(--ease);
+}
+.nav a:hover,.nav a[aria-current="page"]{color:var(--gold)}
+.nav a:hover::after,.nav a[aria-current="page"]::after{right:0}
+.hdr-cta{display:flex;align-items:center;gap:12px}
+.hdr .btn{padding:10px 22px;font-size:12.5px}
+.hdr .btn-ghost{border-color:rgba(201,169,124,.55);color:var(--gold)}
+.hdr .btn-ghost:hover{background:var(--gold);border-color:var(--gold);color:#1A1512}
+.on-light .btn-ghost{border-color:rgba(23,23,26,.24);color:var(--tx-dark)}
+.on-light .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* 汉堡菜单 */
+.burger{display:none;width:44px;height:44px;background:none;border:0;cursor:pointer;position:relative}
+.burger span{position:absolute;left:9px;right:9px;height:1.5px;background:currentColor;transition:.35s var(--ease)}
+.burger span:nth-child(1){top:15px}
+.burger span:nth-child(2){top:22px}
+.burger span:nth-child(3){top:29px}
+body.menu-open .burger span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+body.menu-open .burger span:nth-child(2){opacity:0}
+body.menu-open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.drawer{
+  position:fixed;inset:0;z-index:110;background:var(--ink);
+  height:100vh;height:100dvh;overflow-y:auto;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  padding:calc(96px + env(safe-area-inset-top,0px))
+          max(24px,env(safe-area-inset-right,0px))
+          calc(40px + env(safe-area-inset-bottom,0px))
+          max(24px,env(safe-area-inset-left,0px));
+  display:flex;flex-direction:column;gap:6px;
+  opacity:0;visibility:hidden;transform:translateY(-12px);transition:.4s var(--ease);
+}
+body.menu-open .drawer{opacity:1;visibility:visible;transform:none}
+body.menu-open{overflow:hidden}
+.drawer a{
+  font-size:19px;letter-spacing:.1em;color:var(--tx-light);padding:15px 4px;
+  border-bottom:1px solid var(--line-d);
+}
+.drawer a:hover{color:var(--gold)}
+.drawer .btn{margin-top:26px}
+
+/* ============ 首页 Hero：全屏照片轮播 ============ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;background:var(--ink);overflow:hidden}
+.hero-slides{position:absolute;inset:0;z-index:0}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.25s var(--ease)}
+.hero-slide.is-on{opacity:1}
+.hero-slides::after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(14,14,15,.42) 0%,rgba(14,14,15,0) 24%,rgba(14,14,15,0) 60%,rgba(14,14,15,.80) 100%),
+    linear-gradient(100deg,rgba(11,11,12,.92) 0%,rgba(11,11,12,.78) 34%,rgba(12,12,13,.40) 66%,rgba(12,12,13,.20) 100%);
+}
+.hero-in{position:relative;z-index:4;width:100%;padding:146px 0 132px}
+.hero h1{
+  font-size:clamp(40px,5.9vw,84px);line-height:1.17;letter-spacing:.03em;color:#fff;font-weight:600;
+}
+.hero h1 em{display:block;font-style:normal}
+.hero-sub{margin-top:28px;font-size:15.5px;line-height:2;color:var(--tx-dim);max-width:30em}
+.hero-btns{display:flex;flex-wrap:wrap;gap:13px;margin-top:42px}
+
+/* 左右切换箭头：贴在首屏左右两边，悬停浮现，触屏设备常显 */
+.hero-arrow{
+  position:absolute;top:50%;z-index:6;transform:translateY(-50%);
+  width:46px;height:46px;padding:0;cursor:pointer;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.44);border-radius:4px;
+  background:rgba(14,14,15,.26);backdrop-filter:blur(6px);
+  opacity:0;visibility:hidden;
+  transition:opacity .35s var(--ease),visibility .35s var(--ease),
+             background .3s var(--ease),border-color .3s var(--ease),color .3s var(--ease);
+}
+.hero-prev{left:24px}
+.hero-next{right:24px}
+.hero:hover .hero-arrow,.hero-arrow:focus-visible{opacity:1;visibility:visible}
+.hero-arrow:hover{background:var(--gold);border-color:var(--gold);color:#1A1512}
+.hero-arrow svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+@media (hover:none){
+  .hero-arrow{opacity:1;visibility:visible}
+}
+/* 窗口不够宽时，首屏文字让出左右边距，避免被箭头压住 */
+@media (max-width:1400px){
+  .hero-in .wrap{
+    padding-left:max(88px,env(safe-area-inset-left,0px));
+    padding-right:max(88px,env(safe-area-inset-right,0px));
+  }
+}
+
+/* ============ 数据条（独立深色横带） ============ */
+.stats{background:var(--ink);color:var(--tx-light)}
+.stats-in{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:40px 8px 44px;position:relative;text-align:center}
+.stat+.stat::before{content:"";position:absolute;left:0;top:30px;bottom:30px;width:1px;background:var(--line-d)}
+.stat>b{display:block;font-family:var(--f-num);font-size:34px;font-weight:700;letter-spacing:-.005em;color:#fff;line-height:1}
+.stat>span{display:block;margin-top:13px;font-size:12.5px;letter-spacing:.12em;color:var(--tx-dim-2)}
+.light .stat>b{color:var(--tx-dark)}
+.light .stat>span{color:var(--tx-mid)}
+.light .stat+.stat::before{background:var(--line-l)}
+
+/* ============ 内页 Banner ============ */
+.phero{position:relative;background:var(--ink);padding:186px 0 76px;overflow:hidden}
+.phero .media{position:absolute;inset:0;opacity:.32}
+.phero::after{
+  content:"";position:absolute;inset:0;z-index:2;
+  background:linear-gradient(180deg,rgba(10,10,11,.94),rgba(12,12,13,.72));
+}
+.phero-in{position:relative;z-index:3}
+.phero h1{font-size:clamp(30px,3.6vw,44px);letter-spacing:.06em;color:#fff}
+.phero p{margin-top:13px;font-size:13.5px;letter-spacing:.09em;color:var(--tx-dim)}
+.crumb{font-family:var(--f-en);font-size:11px;letter-spacing:.2em;color:var(--tx-dim-2);margin-bottom:18px}
+.crumb a:hover{color:var(--gold)}
+.crumb i{margin:0 9px;font-style:normal;opacity:.5}
+
+/* ============ 通栏 CTA（浅色渐变圆角卡） ============ */
+.cta-card{
+  position:relative;overflow:hidden;border-radius:20px;
+  padding:52px 56px;display:flex;align-items:center;justify-content:space-between;gap:36px;
+  background:linear-gradient(100deg,#ECE8F1 0%,#F2ECEF 32%,#F8F0E8 66%,#F4EFE7 100%);
+}
+.cta-card::before{
+  content:"";position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(120% 150% at 10% -10%,rgba(255,255,255,.78) 0%,rgba(255,255,255,0) 52%),
+    radial-gradient(85% 130% at 90% 110%,rgba(201,169,124,.26) 0%,rgba(201,169,124,0) 58%);
+}
+.cta-card>*{position:relative;z-index:1}
+.cta-card h2{font-size:27px;letter-spacing:.04em;color:var(--tx-dark);font-weight:600}
+.cta-card p{margin-top:11px;font-size:13.5px;letter-spacing:.04em;color:var(--tx-mid)}
+
+.btn-pill{
+  display:inline-flex;align-items:center;gap:13px;flex:none;
+  padding:16px 26px 16px 30px;border-radius:999px;background:var(--ink);color:#fff;
+  font-size:13.5px;letter-spacing:.08em;white-space:nowrap;transition:.35s var(--ease);
+}
+.btn-pill i{
+  width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.16);flex:none;
+  display:flex;align-items:center;justify-content:center;font-style:normal;font-size:12px;
+  transition:.35s var(--ease);
+}
+.btn-pill:hover{background:var(--gold);color:#1A1512}
+.btn-pill:hover i{background:rgba(26,21,18,.18);transform:translateX(3px)}

@@ -1,0 +1,111 @@
+/* ============ 海南以礼文化传媒有限公司 · 动效层 ============================================
+   独立文件，最后加载。整段包在 prefers-reduced-motion 之外，
+   用户系统开启"减弱动态效果"时全部自动降级为静态。
+   ======================================================================== */
+
+/* ---------- 首屏：当前照片缓慢推镜（Ken Burns） ---------- */
+@keyframes kenBurns{
+  from{transform:scale(1.02)}
+  to{transform:scale(1.12)}
+}
+.hero-slide{will-change:opacity}
+.hero-slide>img{transform:scale(1.02)}
+.hero-slide.is-on>img{animation:kenBurns 9s var(--ease) both}
+
+/* ---------- 首屏标题：逐行遮罩上滑 ---------- */
+.hero h1.rv{opacity:1;transform:none}
+.hero h1 em{display:block;overflow:hidden;padding-bottom:.08em}
+.hero h1 .ln{
+  display:block;transform:translateY(118%);
+  transition:transform 1.05s var(--ease);transition-delay:calc(var(--i,0)*130ms);
+}
+.hero h1.in .ln{transform:none}
+
+/* ---------- 入场时图片轻微回落缩放 ---------- */
+.rv:not(.in) .media>img,.rv:not(.in).media>img{transform:scale(1.07)}
+
+/* ---------- 数据条分隔线抽出 ---------- */
+.stat+.stat::before{transform:scaleY(0);transform-origin:top;transition:transform .9s var(--ease) .25s}
+.stats.in .stat+.stat::before,.rv.in .stat+.stat::before{transform:scaleY(1)}
+.stats:not(.rv) .stat+.stat::before{transform:scaleY(1)}
+
+/* ---------- 按钮：高光扫过 ---------- */
+.btn-gold,.btn-pill,.btn-dark{position:relative;overflow:hidden;isolation:isolate}
+.btn-gold::after,.btn-pill::after,.btn-dark::after{
+  content:"";position:absolute;top:0;bottom:0;left:-60%;width:45%;z-index:-1;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.42),transparent);
+  transform:skewX(-18deg);transition:left .62s var(--ease);
+}
+.btn-gold:hover::after,.btn-pill:hover::after,.btn-dark:hover::after{left:120%}
+
+/* ---------- CTA 卡：光泽缓慢流动 ---------- */
+@keyframes sheen{
+  0%{transform:translateX(-120%) skewX(-14deg)}
+  100%{transform:translateX(220%) skewX(-14deg)}
+}
+.cta-card::after{
+  content:"";position:absolute;top:-30%;bottom:-30%;left:0;width:38%;z-index:0;pointer-events:none;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+  animation:sheen 7.5s var(--ease) infinite;
+}
+
+/* ---------- 服务卡：图标与标题联动 ---------- */
+.svc-ic{transition:color .4s var(--ease),transform .5s var(--ease)}
+.svc:hover .svc-ic{color:var(--gold);transform:translateY(-3px) scale(1.08)}
+.svc h3{transition:color .35s var(--ease)}
+.svc:hover h3{color:var(--gold-d)}
+
+/* ---------- 案例卡：标题与数据联动 ---------- */
+.case-info h3{transition:color .35s var(--ease)}
+.case:hover .case-info h3{color:var(--gold)}
+.light .case:hover .case-info h3,.white .case:hover .case-info h3{color:var(--gold-d)}
+.case .media::before{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.28));
+  opacity:0;transition:opacity .45s var(--ease);
+}
+.case:hover .media::before{opacity:1}
+
+/* ---------- 流程步骤：悬停整行提示 ---------- */
+.step{transition:padding-left .4s var(--ease)}
+.step:hover{padding-left:8px}
+.step h4{transition:color .35s var(--ease)}
+.step:hover h4{color:var(--gold-d)}
+.dark .step:hover h4{color:var(--gold)}
+
+/* ---------- 团队卡：简介展开更顺滑 ---------- */
+.member-ov{transition:background .45s var(--ease)}
+
+/* ---------- 案例筛选：切换补间（仅在用户点过筛选后启用，避免与入场动画打架） ---------- */
+@keyframes itemIn{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:none}}
+body.filtered .case-item:not(.hide){animation:itemIn .5s var(--ease) both}
+.filter{position:relative}
+.filter::after{
+  content:"";position:absolute;left:50%;right:50%;bottom:-1px;height:1px;
+  background:var(--gold);transition:left .35s var(--ease),right .35s var(--ease);
+}
+.filter:hover::after{left:14px;right:14px}
+.filter.on::after{opacity:0}
+
+/* ---------- 表格/列表项：金色小菱形轻转 ---------- */
+.slist li::before{transition:transform .4s var(--ease),background .4s var(--ease)}
+.slist li:hover::before{transform:rotate(135deg);background:var(--gold)}
+
+/* ---------- 返回顶部：呼吸提示 ---------- */
+.top svg{transition:transform .35s var(--ease)}
+.top:hover svg{transform:translateY(-2px)}
+
+/* ---------- 页脚链接位移 ---------- */
+.ftr-links a{display:inline-block;transition:color .3s var(--ease),transform .3s var(--ease)}
+.ftr-links a:hover{transform:translateX(4px)}
+
+/* ---------- 全局降级 ---------- */
+@media (prefers-reduced-motion:reduce){
+  .cta-card::after{animation:none!important}
+  .hero-slide>img,.hero-slide.is-on>img{animation:none!important;transform:none!important}
+  body.filtered .case-item:not(.hide){animation:none!important}
+  .hero h1 .ln{transform:none!important;transition:none!important}
+  .rv:not(.in) .media>img,.rv:not(.in).media>img{transform:none!important}
+  .stat+.stat::before{transform:scaleY(1)!important;transition:none!important}
+  .step:hover{padding-left:0}
+}
