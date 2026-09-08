@@ -6,6 +6,7 @@
   padding:calc(16px + env(safe-area-inset-top,0px)) 0 16px;
 }
 .hdr-in{display:flex;align-items:center;gap:28px}
+.hdr-in>*{min-width:0}
 .hdr.solid{background:rgba(14,14,15,.93);backdrop-filter:saturate(160%) blur(14px);border-bottom-color:var(--line-d)}
 .hdr.on-light{background:rgba(255,255,255,.95);backdrop-filter:saturate(160%) blur(14px);border-bottom-color:var(--line-l)}
 
@@ -36,7 +37,7 @@
 .on-light .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
 
 /* 汉堡菜单 */
-.burger{display:none;width:44px;height:44px;background:none;border:0;cursor:pointer;position:relative}
+.burger{display:none;width:44px;height:44px;max-width:none;flex:none;background:none;border:0;cursor:pointer;position:relative}
 .burger span{position:absolute;left:9px;right:9px;height:1.5px;background:currentColor;transition:.35s var(--ease)}
 .burger span:nth-child(1){top:15px}
 .burger span:nth-child(2){top:22px}
@@ -46,6 +47,7 @@ body.menu-open .burger span:nth-child(2){opacity:0}
 body.menu-open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 .drawer{
   position:fixed;inset:0;z-index:110;background:var(--ink);
+  width:100%;
   height:100vh;height:100dvh;overflow-y:auto;overscroll-behavior:contain;
   -webkit-overflow-scrolling:touch;
   padding:calc(96px + env(safe-area-inset-top,0px))
@@ -64,6 +66,27 @@ body.menu-open{overflow:hidden}
 .drawer a:hover{color:var(--gold)}
 .drawer .btn{margin-top:26px}
 
+/* 抽屉底部联系入口：电话直拨 + 微信复制，缩短手机端转化路径 */
+.drawer-ct{margin-top:auto;padding-top:24px;border-top:1px solid var(--line-d)}
+.drawer-ct-t{display:block;font-size:11px;letter-spacing:.1em;color:var(--tx-dim-2)}
+.drawer .drawer-tel{
+  display:inline-flex;align-items:center;gap:10px;margin-top:12px;padding:4px 0;min-height:44px;
+  font-family:var(--f-num);font-size:26px;font-weight:700;letter-spacing:.02em;color:var(--gold);
+  border-bottom:0;
+}
+.drawer .drawer-tel svg{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.drawer-wx{
+  display:flex;align-items:center;gap:10px;margin-top:2px;padding:8px 0;min-height:44px;
+  background:none;border:0;cursor:pointer;text-align:left;
+  font-size:13.5px;letter-spacing:.05em;color:var(--tx-dim);
+}
+.drawer-wx i{
+  font-style:normal;flex:none;font-size:10.5px;letter-spacing:.08em;color:var(--gold);
+  border:1px solid rgba(201,169,124,.45);border-radius:999px;padding:3px 10px;
+  transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease);
+}
+.drawer-wx.copied i{background:var(--gold);border-color:var(--gold);color:#1A1512}
+
 /* ============ 首页 Hero：全屏照片轮播 ============ */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;background:var(--ink);overflow:hidden}
 .hero-slides{position:absolute;inset:0;z-index:0}
@@ -77,11 +100,32 @@ body.menu-open{overflow:hidden}
 }
 .hero-in{position:relative;z-index:4;width:100%;padding:146px 0 132px}
 .hero h1{
-  font-size:clamp(40px,5.9vw,84px);line-height:1.17;letter-spacing:.03em;color:#fff;font-weight:600;
+  font-size:var(--fs-hero);line-height:1.17;letter-spacing:.03em;color:#fff;font-weight:600;
 }
 .hero h1 em{display:block;font-style:normal}
+.hero h1 em.hero-accent{color:var(--gold)}
+.hero-link-cases{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  margin-top:2px;min-height:44px;padding:8px 4px;
+  font-size:13px;letter-spacing:.08em;color:var(--tx-dim);
+  border:0;background:transparent;text-decoration:none;
+}
+.hero-link-cases span{color:rgba(255,255,255,.88);border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:2px}
+.hero-link-cases:hover{color:var(--gold)}
+.hero-link-cases:hover span{border-bottom-color:var(--gold);color:var(--gold)}
 .hero-sub{margin-top:28px;font-size:15.5px;line-height:2;color:var(--tx-dim);max-width:30em}
+.hero-stats{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;
+  margin-top:28px;max-width:360px;
+  border-top:1px solid rgba(255,255,255,.18);
+}
+.hero-stats>div{padding:16px 0 4px}
+.hero-stats>div+div{padding-left:22px;border-left:1px solid rgba(255,255,255,.18)}
+.hero-stats b{display:block;font-family:var(--f-num);font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1;color:#fff}
+.hero-stats span{display:block;margin-top:8px;font-size:11.5px;letter-spacing:.08em;color:rgba(255,255,255,.55)}
 .hero-btns{display:flex;flex-wrap:wrap;gap:13px;margin-top:42px}
+/* 首屏信任路径：即使 JS 尚未把 .in 打上，也不要长时间透明 */
+.hero .hero-sub.rv,.hero .hero-stats.rv,.hero .hero-btns.rv{opacity:1;transform:none}
 
 /* 左右切换箭头：贴在首屏左右两边，悬停浮现，触屏设备常显 */
 .hero-arrow{
@@ -102,6 +146,17 @@ body.menu-open{overflow:hidden}
 @media (hover:none){
   .hero-arrow{opacity:1;visibility:visible}
 }
+
+/* 轮播圆点：底部居中指示当前张，提示还能继续切换 */
+.hero-dots{
+  position:absolute;left:50%;bottom:24px;z-index:6;transform:translateX(-50%);
+  display:flex;gap:9px;pointer-events:none;
+}
+.hero-dots span{
+  width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);
+  transition:background .35s var(--ease),transform .35s var(--ease);
+}
+.hero-dots span.on{background:var(--gold);transform:scale(1.2)}
 /* 窗口不够宽时，首屏文字让出左右边距，避免被箭头压住 */
 @media (max-width:1400px){
   .hero-in .wrap{
@@ -112,7 +167,8 @@ body.menu-open{overflow:hidden}
 
 /* ============ 数据条（独立深色横带） ============ */
 .stats{background:var(--ink);color:var(--tx-light)}
-.stats-in{display:grid;grid-template-columns:repeat(4,1fr)}
+.stats-in{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.stats-in>*{min-width:0}
 .stat{padding:40px 8px 44px;position:relative;text-align:center}
 .stat+.stat::before{content:"";position:absolute;left:0;top:30px;bottom:30px;width:1px;background:var(--line-d)}
 .stat>b{display:block;font-family:var(--f-num);font-size:34px;font-weight:700;letter-spacing:-.005em;color:#fff;line-height:1}
@@ -129,7 +185,7 @@ body.menu-open{overflow:hidden}
   background:linear-gradient(180deg,rgba(10,10,11,.94),rgba(12,12,13,.72));
 }
 .phero-in{position:relative;z-index:3}
-.phero h1{font-size:clamp(30px,3.6vw,44px);letter-spacing:.06em;color:#fff}
+.phero h1{font-size:var(--fs-page-hero);letter-spacing:.06em;color:#fff}
 .phero p{margin-top:13px;font-size:13.5px;letter-spacing:.09em;color:var(--tx-dim)}
 .crumb{font-family:var(--f-en);font-size:11px;letter-spacing:.2em;color:var(--tx-dim-2);margin-bottom:18px}
 .crumb a:hover{color:var(--gold)}
@@ -148,6 +204,7 @@ body.menu-open{overflow:hidden}
     radial-gradient(85% 130% at 90% 110%,rgba(201,169,124,.26) 0%,rgba(201,169,124,0) 58%);
 }
 .cta-card>*{position:relative;z-index:1}
+.cta-card>div{min-width:0}
 .cta-card h2{font-size:27px;letter-spacing:.04em;color:var(--tx-dark);font-weight:600}
 .cta-card p{margin-top:11px;font-size:13.5px;letter-spacing:.04em;color:var(--tx-mid)}
 

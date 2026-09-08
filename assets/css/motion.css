@@ -99,6 +99,15 @@ body.filtered .case-item:not(.hide){animation:itemIn .5s var(--ease) both}
 .ftr-links a{display:inline-block;transition:color .3s var(--ease),transform .3s var(--ease)}
 .ftr-links a:hover{transform:translateX(4px)}
 
+/* ---------- 手机端：首屏推镜幅度减半，降低渲染负担 ---------- */
+@media (max-width:768px){
+  @keyframes kenBurnsMobile{
+    from{transform:scale(1.01)}
+    to{transform:scale(1.05)}
+  }
+  .hero-slide.is-on>img{animation-name:kenBurnsMobile;animation-duration:11s}
+}
+
 /* ---------- 全局降级 ---------- */
 @media (prefers-reduced-motion:reduce){
   .cta-card::after{animation:none!important}

@@ -1,5 +1,5 @@
 /* ============ 团队 ============ */
-.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .member{position:relative;overflow:hidden;background:var(--ink-2)}
 .member .media{aspect-ratio:3/4}
 .member-ov{
@@ -18,7 +18,7 @@
 }
 
 /* ============ 价格方案 ============ */
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+.price-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start}
 .plan{background:#fff;border:1px solid var(--line-l);padding:44px 34px 38px;position:relative;transition:.4s var(--ease)}
 .plan:hover{transform:translateY(-6px);box-shadow:0 22px 54px rgba(20,18,16,.09)}
 .plan-hot{background:var(--ink);border-color:var(--ink);color:#fff;padding:56px 34px 46px;margin-top:-18px}
@@ -45,7 +45,8 @@
 .plan-feat li.off::before{border-color:var(--tx-mid);transform:none;top:.72em;height:0;width:9px;border-left:0}
 
 /* ============ 客户评价 ============ */
-.tm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.tm-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.tm-grid>*{min-width:0}
 .tm{background:#fff;border:1px solid var(--line-l);padding:34px 30px;display:flex;flex-direction:column}
 .tm-q{font-family:var(--f-en);font-size:38px;line-height:1;color:var(--cream-2);margin-bottom:14px}
 .tm p{font-size:13.5px;line-height:2;color:var(--tx-mid);flex:1}
@@ -61,13 +62,28 @@
 .stars{margin-left:auto;color:var(--gold);font-size:12px;letter-spacing:.14em;white-space:nowrap}
 
 /* ============ 联系我们 ============ */
-.contact-split{display:grid;grid-template-columns:1fr 1.06fr;gap:70px;align-items:start}
+.contact-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.06fr);gap:70px;align-items:start}
+.contact-split>*{min-width:0}
 .cinfo{display:grid;gap:30px;margin-top:38px}
 .citem{display:grid;grid-template-columns:38px 1fr;gap:16px;align-items:start}
 .citem svg{width:19px;height:19px;stroke:var(--gold);fill:none;stroke-width:1.4;margin-top:3px}
 .citem h4{font-size:13px;letter-spacing:.14em;color:var(--tx-mid);font-weight:400}
-.citem p{margin-top:7px;font-size:15px;letter-spacing:.04em;color:var(--tx-dark);line-height:1.7}
+.citem p{margin-top:7px;font-size:15px;letter-spacing:.04em;color:var(--tx-dark);line-height:1.7;overflow-wrap:anywhere}
 .citem a:hover{color:var(--gold)}
+
+/* 微信号点按复制：正文样式的按钮 + 金色小胶囊提示 */
+.copy-wx{
+  display:inline-flex;align-items:center;gap:10px;padding:0;margin:0;
+  background:none;border:0;cursor:pointer;
+  font:inherit;color:inherit;letter-spacing:inherit;line-height:inherit;
+}
+.copy-wx i{
+  font-style:normal;flex:none;font-size:10.5px;letter-spacing:.08em;color:var(--gold-d);
+  border:1px solid rgba(201,169,124,.45);border-radius:999px;padding:3px 10px;
+  transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease);
+}
+.copy-wx:hover i{border-color:var(--gold);color:var(--gold)}
+.copy-wx.copied i{background:var(--gold);border-color:var(--gold);color:#1A1512}
 
 .form{background:#fff;border:1px solid var(--line-l);padding:42px 38px}
 .form h3{font-size:19px;letter-spacing:.1em}
@@ -102,7 +118,9 @@
 
 /* ============ 页脚 ============ */
 .ftr{background:var(--ink);color:var(--tx-dim);padding:76px 0 0}
-.ftr-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:44px;padding-bottom:52px}
+.ftr-top{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,2fr) minmax(0,1.3fr);gap:44px;padding-bottom:52px}
+.ftr-top>*{min-width:0}
+.ftr-navs{display:grid;grid-template-columns:1fr 1fr;gap:44px;min-width:0}
 .ftr .logo{margin-bottom:18px}
 .ftr-name{font-size:15px;letter-spacing:.06em;color:#fff;font-weight:500;margin-bottom:12px}
 .ftr-desc{font-size:13px;line-height:1.95;color:var(--tx-dim-2);max-width:24em}
@@ -110,8 +128,10 @@
 .ftr-links{display:grid;gap:11px}
 .ftr-links a{font-size:13px;color:var(--tx-dim-2)}
 .ftr-links a:hover{color:var(--gold)}
-.ftr-ct{display:grid;gap:11px;font-size:13px;color:var(--tx-dim-2)}
+.ftr-ct{display:grid;gap:11px;font-size:13px;color:var(--tx-dim-2);overflow-wrap:anywhere}
 .ftr-ct b{color:#fff;font-family:var(--f-num);font-size:20px;font-weight:700;letter-spacing:.01em}
+.ftr-ct b a{color:inherit}
+.ftr-ct a:hover{color:var(--gold)}
 .ftr-bot{
   border-top:1px solid var(--line-d);padding:22px 0 calc(26px + env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;gap:14px;
   justify-content:space-between;font-size:12px;color:var(--tx-dim-2);letter-spacing:.05em;

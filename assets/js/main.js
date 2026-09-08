@@ -31,41 +31,66 @@
       setTimeout(showTitle, 400);
     }
 
-    /* --- 首屏全屏照片轮播（悬停出现左右箭头） --- */
+    /* --- 首屏全屏照片轮播：仅手动切换（无 autoplay / setInterval） --- */
     var heroEl = document.querySelector('.hero');
     if (heroEl) {
       var slides = heroEl.querySelectorAll('.hero-slide');
       var prevBtn = heroEl.querySelector('.hero-prev');
       var nextBtn = heroEl.querySelector('.hero-next');
-      var cur = 0, timer = null, DUR = 6000;
+      var cur = 0;
+      var dots = [];
 
       function paintSlide(n) {
         cur = (n + slides.length) % slides.length;
         slides.forEach(function (s, i) { s.classList.toggle('is-on', i === cur); });
+        dots.forEach(function (d, i) { d.classList.toggle('on', i === cur); });
       }
-      function autoplay() {
-        clearInterval(timer);
-        if (!softMotion && slides.length > 1) {
-          timer = setInterval(function () { paintSlide(cur + 1); }, DUR);
-        }
-      }
-      function step(d) { paintSlide(cur + d); autoplay(); }
+      function step(d) { paintSlide(cur + d); }
 
       if (slides.length) {
+        /* 圆点指示器：当前第几张一目了然（尤其触屏没有 hover 提示时） */
+        if (slides.length > 1) {
+          var dotsBox = document.createElement('div');
+          dotsBox.className = 'hero-dots';
+          dotsBox.setAttribute('aria-hidden', 'true');
+          slides.forEach(function () {
+            var d = document.createElement('span');
+            dotsBox.appendChild(d);
+            dots.push(d);
+          });
+          heroEl.appendChild(dotsBox);
+        }
+
         if (prevBtn) prevBtn.addEventListener('click', function () { step(-1); });
         if (nextBtn) nextBtn.addEventListener('click', function () { step(1); });
-        /* 键盘左右键也能切 */
         heroEl.addEventListener('keydown', function (e) {
           if (e.key === 'ArrowLeft') step(-1);
           else if (e.key === 'ArrowRight') step(1);
         });
+
+        /* 触屏左右滑动切换：只认明确的横向手势，不干扰纵向滚动页面 */
+        var swX = 0, swY = 0, swOn = false;
+        heroEl.addEventListener('touchstart', function (e) {
+          if (e.touches.length !== 1) { swOn = false; return; }
+          swOn = true;
+          swX = e.touches[0].clientX;
+          swY = e.touches[0].clientY;
+        }, { passive: true });
+        heroEl.addEventListener('touchend', function (e) {
+          if (!swOn) return;
+          swOn = false;
+          var dx = e.changedTouches[0].clientX - swX;
+          var dy = e.changedTouches[0].clientY - swY;
+          if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.4) step(dx < 0 ? 1 : -1);
+        }, { passive: true });
+
         paintSlide(0);
-        autoplay();
-        /* 切到后台就停，回来再续，省电也避免回来时连跳几张 */
-        document.addEventListener('visibilitychange', function () {
-          if (document.hidden) clearInterval(timer); else autoplay();
-        });
       }
+
+      /* 首屏钩子/硬指标/CTA 必须立刻可读：勿等 IO（rootMargin -8% 会把底部按钮卡住）。 */
+      heroEl.querySelectorAll('.rv').forEach(function (el) {
+        el.classList.add('in');
+      });
     }
 
     /* --- 案例卡：悬停播放预览，右上角按钮可开声音 --- */
@@ -384,6 +409,47 @@
         });
       });
     }
+
+    /* --- 微信号点按复制：clipboard API 优先，失败退回隐藏输入框方案 --- */
+    function copyText(text, cb) {
+      function legacy() {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed;left:-999px;top:0;opacity:0';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        return ok;
+      }
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(
+          function () { cb(true); },
+          function () { cb(legacy()); }
+        );
+      } else {
+        cb(legacy());
+      }
+    }
+    document.querySelectorAll('[data-copy]').forEach(function (el) {
+      var hint = el.querySelector('i');
+      var hint0 = hint ? hint.textContent : '';
+      var timer = null;
+      el.addEventListener('click', function () {
+        copyText(el.getAttribute('data-copy'), function (ok) {
+          if (!hint) return;
+          hint.textContent = ok ? '已复制' : '复制失败，请长按';
+          el.classList.toggle('copied', ok);
+          clearTimeout(timer);
+          timer = setTimeout(function () {
+            hint.textContent = hint0;
+            el.classList.remove('copied');
+          }, 1800);
+        });
+      });
+    });
 
     /* --- 咨询表单：校验后发送到邮件转发服务，失败时保留用户输入 --- */
     var form = document.getElementById('leadForm');

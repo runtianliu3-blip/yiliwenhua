@@ -57,6 +57,14 @@
       '<nav class="drawer" id="drawer" aria-label="移动端导航" aria-hidden="true">' +
         navLinks() +
         '<a class="btn btn-gold" href="contact.html">获取 IP 方案</a>' +
+        '<div class="drawer-ct">' +
+          '<span class="drawer-ct-t">预约咨询 · 周一至周日 10:00 – 18:00</span>' +
+          '<a class="drawer-tel" href="tel:13136026602">' +
+            '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.7 2z"/></svg>' +
+            '13136026602' +
+          '</a>' +
+          '<button class="drawer-wx" type="button" data-copy="WangTX112">微信号：WangTX112 <i>点按复制</i></button>' +
+        '</div>' +
       '</nav>';
   }
 
@@ -69,24 +77,24 @@
       '<footer class="ftr">' +
         '<div class="wrap">' +
           '<div class="ftr-top">' +
-            '<div>' + logo() +
+            '<div class="ftr-brand">' + logo() +
               '<p class="ftr-name">海南以礼文化传媒有限公司</p>' +
-              '<p class="ftr-desc">专注IP策划、短视频教学、账号陪跑于一体的新媒体服务机构，' +
-              '赋能个体与实体企业放大自身影响力，实现流量长效增长与可持续商业变现。</p>' +
+              '<p class="ftr-desc">专注 IP 策划、短视频教学与账号陪跑，帮实体老板把口碑做成可获客的个人品牌。</p>' +
             '</div>' +
-            '<div><h5>快速链接</h5><div class="ftr-links">' +
-              '<a href="about.html">关于我们</a><a href="services.html">服务项目</a>' +
-              '<a href="process.html">服务流程</a>' +
-            '</div></div>' +
-            '<div><h5>服务与案例</h5><div class="ftr-links">' +
-              '<a href="cases.html">案例中心</a>' +
-              '<a href="testimonials.html">客户评价</a><a href="contact.html">联系我们</a>' +
-            '</div></div>' +
-            '<div><h5>预约咨询</h5><div class="ftr-ct">' +
-              '<b>13136026602</b>' +
-              '<span>微信号：WangTX112</span>' +
-              '<span>海口市龙华区林安国际商贸城<br>A1 栋 13 楼 1319 房</span>' +
-              '<span>周一至周日 10:00 – 18:00</span>' +
+            '<div class="ftr-navs">' +
+              '<div><h5>快速链接</h5><div class="ftr-links">' +
+                '<a href="about.html">关于我们</a><a href="services.html">服务项目</a>' +
+                '<a href="process.html">服务流程</a>' +
+              '</div></div>' +
+              '<div><h5>服务与案例</h5><div class="ftr-links">' +
+                '<a href="cases.html">案例中心</a>' +
+                '<a href="testimonials.html">客户评价</a><a href="contact.html">联系我们</a>' +
+              '</div></div>' +
+            '</div>' +
+            '<div class="ftr-book"><h5>预约咨询</h5><div class="ftr-ct">' +
+              '<b><a href="tel:13136026602">13136026602</a></b>' +
+              '<span>微信 WangTX112 · 周一至周日 10:00–18:00</span>' +
+              '<span>海口市龙华区林安国际商贸城 A1 栋 13 楼 1319</span>' +
             '</div></div>' +
           '</div>' +
           '<div class="ftr-bot">' +
