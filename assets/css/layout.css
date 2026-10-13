@@ -113,16 +113,16 @@ body.menu-open{overflow:hidden}
 .hero-link-cases span{color:rgba(255,255,255,.88);border-bottom:1px solid rgba(255,255,255,.35);padding-bottom:2px}
 .hero-link-cases:hover{color:var(--gold)}
 .hero-link-cases:hover span{border-bottom-color:var(--gold);color:var(--gold)}
-.hero-sub{margin-top:28px;font-size:15.5px;line-height:2;color:var(--tx-dim);max-width:30em}
+.hero-sub{margin-top:30px;font-size:16px;line-height:2;color:rgba(255,255,255,.72);max-width:30em;letter-spacing:.03em}
 .hero-stats{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;
-  margin-top:28px;max-width:360px;
+  margin-top:30px;max-width:380px;
   border-top:1px solid rgba(255,255,255,.18);
 }
-.hero-stats>div{padding:16px 0 4px}
-.hero-stats>div+div{padding-left:22px;border-left:1px solid rgba(255,255,255,.18)}
-.hero-stats b{display:block;font-family:var(--f-num);font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1;color:#fff}
-.hero-stats span{display:block;margin-top:8px;font-size:11.5px;letter-spacing:.08em;color:rgba(255,255,255,.55)}
+.hero-stats>div{padding:18px 0 4px}
+.hero-stats>div+div{padding-left:24px;border-left:1px solid rgba(255,255,255,.18)}
+.hero-stats b{display:block;font-family:var(--f-num);font-size:31px;font-weight:700;letter-spacing:-.02em;line-height:1;color:#fff}
+.hero-stats span{display:block;margin-top:9px;font-size:11.5px;letter-spacing:.08em;color:rgba(255,255,255,.58)}
 .hero-btns{display:flex;flex-wrap:wrap;gap:13px;margin-top:42px}
 /* 首屏信任路径：即使 JS 尚未把 .in 打上，也不要长时间透明 */
 .hero .hero-sub.rv,.hero .hero-stats.rv,.hero .hero-btns.rv{opacity:1;transform:none}
@@ -193,20 +193,22 @@ body.menu-open{overflow:hidden}
 
 /* ============ 通栏 CTA（浅色渐变圆角卡） ============ */
 .cta-card{
-  position:relative;overflow:hidden;border-radius:20px;
-  padding:52px 56px;display:flex;align-items:center;justify-content:space-between;gap:36px;
-  background:linear-gradient(100deg,#ECE8F1 0%,#F2ECEF 32%,#F8F0E8 66%,#F4EFE7 100%);
+  position:relative;overflow:hidden;border-radius:24px;
+  padding:58px 60px;display:flex;align-items:center;justify-content:space-between;gap:36px;
+  background:linear-gradient(105deg,#F0ECE4 0%,#F7F0E5 38%,#F4E7D3 72%,#EFE3CE 100%);
+  border:1px solid rgba(201,169,124,.22);
+  box-shadow:0 30px 70px rgba(23,20,16,.10),0 2px 6px rgba(23,20,16,.04);
 }
 .cta-card::before{
   content:"";position:absolute;inset:0;z-index:0;
   background:
-    radial-gradient(120% 150% at 10% -10%,rgba(255,255,255,.78) 0%,rgba(255,255,255,0) 52%),
-    radial-gradient(85% 130% at 90% 110%,rgba(201,169,124,.26) 0%,rgba(201,169,124,0) 58%);
+    radial-gradient(120% 150% at 10% -10%,rgba(255,255,255,.82) 0%,rgba(255,255,255,0) 52%),
+    radial-gradient(85% 130% at 90% 110%,rgba(201,169,124,.34) 0%,rgba(201,169,124,0) 58%);
 }
 .cta-card>*{position:relative;z-index:1}
 .cta-card>div{min-width:0}
-.cta-card h2{font-size:27px;letter-spacing:.04em;color:var(--tx-dark);font-weight:600}
-.cta-card p{margin-top:11px;font-size:13.5px;letter-spacing:.04em;color:var(--tx-mid)}
+.cta-card h2{font-size:clamp(24px,2.4vw,32px);letter-spacing:.04em;color:var(--tx-dark);font-weight:600}
+.cta-card p{margin-top:12px;font-size:14px;letter-spacing:.04em;color:var(--tx-mid)}
 
 .btn-pill{
   display:inline-flex;align-items:center;gap:13px;flex:none;
